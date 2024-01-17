@@ -7,7 +7,6 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
 } from "react-native";
-import { AntDesign } from "@expo/vector-icons";
 
 import Header from "./components/header";
 import ToDoItem from "./components/toDoItem";
@@ -47,14 +46,12 @@ the state.
     } else {
       Alert.alert(
         "OOPS",
-        `Todos must be over 3 chars long. You\'ve typed just ${text.length} chars`,
+        `Todos must be over 3 chars long. You\'ve typed just ${text.length} ${
+          text.length === 1 ? "char" : "chars"
+        }`,
         [
           {
             text: "Understood",
-            onPress: () => console.log("alert closed"),
-          },
-          {
-            text: "Sad🥲",
             onPress: () => console.log("alert closed"),
           },
         ]

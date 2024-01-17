@@ -3,24 +3,19 @@ import React from "react";
 import { AntDesign } from "@expo/vector-icons";
 
 const ToDoItem = ({ item, pressHandler }) => {
-  // const deleteConfirmatin = (id) => {
-  //   Alert.alert(
-  //     "Delete todo",
-  //     "Are you sure you want to delete this todo?",
-  //     [{ text: "yes" }, { text: "no" }],
-  //     (onPress = {})
-  //   );
-
-  //   pressHandler(item.id);
-  // };
+  const deleteConfirmation = () => {
+    Alert.alert("Delete todo", "Are you sure you want to delete this task?", [
+      { text: "✅Yes", onPress: () => pressHandler(item.id) },
+      { text: "❌No" },
+    ]);
+  };
 
   return (
     <View style={s.toDoItemContainer}>
       <View style={s.item}>
         <TouchableOpacity
-          onPress={() => pressHandler(item.id)}
-          // onPress={() => deleteConfirmatin(item.id)}
-          style={s.iconContainer} // You can add your custom styles here
+          onPress={() => deleteConfirmation(item.id)}
+          style={s.iconContainer}
         >
           <AntDesign name="delete" size={24} color="black" />
         </TouchableOpacity>
