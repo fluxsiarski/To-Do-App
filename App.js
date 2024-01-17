@@ -39,10 +39,36 @@ the state.
   };
 
   const submitHandler = (text) => {
+    const taskExists = todos.some((todo) => todo.text === text);
+
     if (text.length >= 3) {
-      setTodos((prevTodo) => {
-        return [{ text: text, id: Math.random().toString() }, ...prevTodo];
-      });
+      if (taskExists) {
+        Alert.alert(
+          "Task Already Exists",
+          "This task already exists in your list.",
+          [
+            {
+              text: "OK",
+              onPress: () => console.log("alert closed"),
+            },
+            {
+              text: "Add nonetheless",
+              onPress: () => {
+                setTodos((prevTodo) => {
+                  return [
+                    { text: text, id: Math.random().toString() },
+                    ...prevTodo,
+                  ];
+                });
+              },
+            },
+          ]
+        );
+      } else {
+        setTodos((prevTodo) => {
+          return [{ text: text, id: Math.random().toString() }, ...prevTodo];
+        });
+      }
     } else {
       Alert.alert(
         "OOPS",
