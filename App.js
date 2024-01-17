@@ -16,9 +16,9 @@ import Sandbox from "./components/sandbox";
 
 export default function App() {
   const [todos, setTodos] = useState([
-    { text: "buy coffee", id: "1" },
-    { text: "create an app", id: "2" },
-    { text: "react native lesson", id: "3" },
+    { text: "Buy coffee", id: "1" },
+    { text: "Create an app", id: "2" },
+    { text: "React native lesson 20:00", id: "3" },
   ]);
 
   /*
@@ -41,6 +41,14 @@ the state.
   const submitHandler = (text) => {
     const taskExists = todos.some((todo) => todo.text === text);
 
+    const addTaskToCurrentList = (shouldAddTask) => {
+      if (shouldAddTask) {
+        setTodos((prevTodo) => {
+          return [{ text: text, id: Math.random().toString() }, ...prevTodo];
+        });
+      }
+    };
+
     if (text.length >= 3) {
       if (taskExists) {
         Alert.alert(
@@ -54,20 +62,15 @@ the state.
             {
               text: "Add nonetheless",
               onPress: () => {
-                setTodos((prevTodo) => {
-                  return [
-                    { text: text, id: Math.random().toString() },
-                    ...prevTodo,
-                  ];
-                });
+                const shouldAddTask = true;
+                addTaskToCurrentList(shouldAddTask);
               },
             },
           ]
         );
       } else {
-        setTodos((prevTodo) => {
-          return [{ text: text, id: Math.random().toString() }, ...prevTodo];
-        });
+        const shouldAddTask = true;
+        addTaskToCurrentList(shouldAddTask);
       }
     } else {
       Alert.alert(
